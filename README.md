@@ -4,7 +4,6 @@ Project-Management Software!
 
 
 ## Warum Port 8448?
-"Das sieht aus, wie der Sockel von einer Säule"
 
 ```
 8448  8448  8448
