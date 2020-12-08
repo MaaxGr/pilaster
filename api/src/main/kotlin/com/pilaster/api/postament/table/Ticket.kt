@@ -4,9 +4,10 @@ import org.jetbrains.exposed.sql.Table
 
 object Ticket : Table() {
 
-    val id = integer("id")
-    val description = varchar("description", length = 200)
+    val number = integer("Number")
+    val title = varchar("Title", length = 500)
+    val description = text("description")
 
-    override val primaryKey = PrimaryKey(id)
+    override val primaryKey = PrimaryKey(number)
 
 }
