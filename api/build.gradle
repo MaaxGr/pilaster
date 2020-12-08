@@ -15,6 +15,7 @@ group 'com.pilaster'
 version '1'
 mainClassName = "io.ktor.server.netty.EngineMain"
 
+
 repositories {
     mavenLocal()
     jcenter()
@@ -25,4 +26,9 @@ dependencies {
     implementation "io.ktor:ktor-server-netty:$ktor_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
+    // Exposed
+    implementation "org.jetbrains.exposed:exposed-core:0.28.1"
+    implementation "org.jetbrains.exposed:exposed-dao:0.28.1"
+    implementation "org.jetbrains.exposed:exposed-jdbc:0.28.1"
+    compile("mysql:mysql-connector-java:5.1.48")
 }
