@@ -38,9 +38,8 @@ class App : RComponent<RProps, AppState>() {
             setProp("data-expand", "true")
 
             li{
-                a{
-                    setProp("href","#_home_")
-                    +"Home"
+                child(Tab::class) {
+                    attrs.title = "Home"
                 }
             }
             li{
