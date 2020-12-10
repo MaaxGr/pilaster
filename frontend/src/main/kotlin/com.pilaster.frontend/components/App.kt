@@ -31,6 +31,22 @@ class App : RComponent<RProps, AppState>() {
 
 
     override fun RBuilder.render() {
+
+        ul {
+            setProp("class", "h-menu")
+            li{
+                a{
+                    setProp("href","#")
+                    +"Home"
+                }
+            }
+            li{
+                a{
+                    setProp("href","#")
+                    +"Tickets"
+                }
+            }
+        }
         h1 {
             +"Tickets"
         }
