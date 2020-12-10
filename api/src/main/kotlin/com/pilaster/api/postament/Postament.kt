@@ -1,7 +1,8 @@
 package com.pilaster.api.postament
 
+import com.pilaster.api.postament.dbo.DBOTicket
 import com.pilaster.api.entities.Ticket
-import com.pilaster.api.postament.table.TicketTable
+import com.pilaster.api.postament.dbo.DBOTask
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.selectAll
@@ -24,23 +25,25 @@ class Postament {
 
     private fun createTables(){
         transaction {
-            SchemaUtils.createMissingTablesAndColumns(TicketTable)
+            SchemaUtils.createMissingTablesAndColumns(DBOTask)
+            SchemaUtils.createMissingTablesAndColumns(DBOTicket)
         }
     }
 
     private fun dropTables(){
         transaction {
-            SchemaUtils.drop(TicketTable)
+            SchemaUtils.drop(DBOTicket)
+            SchemaUtils.drop(DBOTask)
         }
     }
 
     fun getAllTickets(): List<Ticket> {
         return transaction {
-            TicketTable.selectAll()
+            DBOTicket.selectAll()
                     .map {
                         Ticket(
-                                id = it[TicketTable.id],
-                                description = it[TicketTable.description]
+                                id = it[DBOTicket.id],
+                                description = it[DBOTicket.description]
                         )
                     }
         }
