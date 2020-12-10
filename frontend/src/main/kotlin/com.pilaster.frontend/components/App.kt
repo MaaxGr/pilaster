@@ -34,38 +34,61 @@ class App : RComponent<RProps, AppState>() {
 
         ul {
             setProp("class", "h-menu")
+            setProp("data-role", "tabs")
+            setProp("data-expand", "true")
+
             li{
                 a{
-                    setProp("href","#")
+                    setProp("href","#_home_")
                     +"Home"
                 }
             }
             li{
                 a{
-                    setProp("href","#")
+                    setProp("href","#_projects")
+                    setProp("class","disabled")
+                    +"Projekte"
+                }
+            }
+            li{
+                a{
+                    setProp("href","#_tickets_")
                     +"Tickets"
                 }
             }
         }
-        h1 {
-            +"Tickets"
-        }
-        div {
-            state.ticket?.let { ticketList ->
+        div{
+            setProp("class","border bd-default no-border-top p-2")
+            div {
+                setProp("id","_home_")
+                div {
+                    setProp("data-role","cube")
+                }
+            }
+            div {
+                setProp("id","_tickets_")
+                h1 {
+                    +"Tickets"
+                }
+                div {
+                    state.ticket?.let { ticketList ->
 
-                h2 { +"Ticket-Anzahl: ${ticketList.tickets.size}" }
+                        h2 { +"Ticket-Anzahl: ${ticketList.tickets.size}" }
 
-                ul {
+                        ul {
 
-                    for (ticket in ticketList.tickets) {
-                        li { +"Ticket #${ticket.id}: ${ticket.description}" }
+                            for (ticket in ticketList.tickets) {
+                                li { +"Ticket #${ticket.id}: ${ticket.description}" }
+                            }
+
+                        }
                     }
+
 
                 }
             }
-
-
         }
+
     }
 
     private suspend fun fetchTickets(): TicketList {
