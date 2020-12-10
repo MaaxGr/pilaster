@@ -1,7 +1,7 @@
 package com.pilaster.api
 
-import com.pilaster.api.entities.TicketList
 import com.pilaster.api.postament.Postament
+import com.pilaster.common.TicketList
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
@@ -51,7 +51,7 @@ fun Application.module(testing: Boolean = false) {
         }
 
         get("/tickets") {
-            call.respond(TicketList(postament.getAllTickets()))
+            call.respond(TicketList(postament.getAllTickets().toTypedArray()))
         }
 
         get("/tickets/first") {

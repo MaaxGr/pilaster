@@ -1,6 +1,6 @@
 package com.pilaster.frontend.components
 
-import com.pilaster.frontend.entities.TicketList
+import com.pilaster.common.TicketList
 import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.await

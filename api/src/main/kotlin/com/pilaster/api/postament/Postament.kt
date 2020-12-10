@@ -1,9 +1,9 @@
 package com.pilaster.api.postament
 
-import com.pilaster.api.entities.Ticket
 import com.pilaster.api.postament.dao.DAOProject
 import com.pilaster.api.postament.dao.DAOTask
 import com.pilaster.api.postament.dao.DAOTicket
+import com.pilaster.common.Ticket
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils

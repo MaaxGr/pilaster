@@ -1,4 +1,4 @@
-package com.pilaster.frontend.entities
+package com.pilaster.common
 
 data class TicketList(
         val tickets: Array<Ticket>

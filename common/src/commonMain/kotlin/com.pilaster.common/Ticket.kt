@@ -1,4 +1,4 @@
-package com.pilaster.api.entities
+package com.pilaster.common
 
 data class Ticket(
         val id: Int,
