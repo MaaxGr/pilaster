@@ -32,30 +32,11 @@ class App : RComponent<RProps, AppState>() {
 
     override fun RBuilder.render() {
 
-        ul {
-            setProp("class", "h-menu")
-            setProp("data-role", "tabs")
-            setProp("data-expand", "true")
-
-            li{
-                child(Tab::class) {
-                    attrs.title = "Home"
-                }
-            }
-            li{
-                a{
-                    setProp("href","#_projects")
-                    setProp("class","disabled")
-                    +"Projekte"
-                }
-            }
-            li{
-                a{
-                    setProp("href","#_tickets_")
-                    +"Tickets"
-                }
-            }
+        // Topmenü zeichnen
+        child(TopMenu::class) {
+            //attrs.title = "Home"
         }
+
         div{
             setProp("class","border bd-default no-border-top p-2")
             div {
