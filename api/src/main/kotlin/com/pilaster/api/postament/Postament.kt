@@ -2,6 +2,7 @@ package com.pilaster.api.postament
 
 import com.pilaster.api.postament.dbo.DBOTicket
 import com.pilaster.api.entities.Ticket
+import com.pilaster.api.postament.dbo.DBOProject
 import com.pilaster.api.postament.dbo.DBOTask
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -27,6 +28,7 @@ class Postament {
         transaction {
             SchemaUtils.createMissingTablesAndColumns(DBOTask)
             SchemaUtils.createMissingTablesAndColumns(DBOTicket)
+            SchemaUtils.createMissingTablesAndColumns(DBOProject)
         }
     }
 
@@ -34,6 +36,7 @@ class Postament {
         transaction {
             SchemaUtils.drop(DBOTicket)
             SchemaUtils.drop(DBOTask)
+            SchemaUtils.drop(DBOProject)
         }
     }
 
