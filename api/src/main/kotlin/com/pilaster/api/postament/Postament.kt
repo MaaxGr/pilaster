@@ -1,9 +1,10 @@
 package com.pilaster.api.postament
 
-import com.pilaster.api.postament.dbo.DBOTicket
 import com.pilaster.api.entities.Ticket
 import com.pilaster.api.postament.dbo.DBOProject
 import com.pilaster.api.postament.dbo.DBOTask
+import com.pilaster.api.postament.dbo.DBOTicket
+import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.selectAll
@@ -18,6 +19,9 @@ class Postament {
 
     init {
         Database.connect(url=url, driver=driver, user=user, password=secret )
+
+        val flyway = Flyway.configure().dataSource(url, user, secret).load()
+        flyway.migrate()
     }
     fun recreate() {
         dropTables()
