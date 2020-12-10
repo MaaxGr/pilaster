@@ -10,10 +10,10 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 class Postament {
 
-    private val url : String = "jdbc:mysql://localhost:3306/pilaster"
+    private val url : String = "jdbc:mysql://vh07.maax.gr:3306/pilaster"
     private val driver : String = "com.mysql.jdbc.Driver"
     private val user : String = "pilaster"
-    private val secret : String = "pilaster"
+    private val secret : String = System.getenv("magrdbpw")
 
     init {
         Database.connect(url=url, driver=driver, user=user, password=secret )

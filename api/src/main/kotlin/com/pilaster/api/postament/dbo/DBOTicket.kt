@@ -2,7 +2,7 @@ package com.pilaster.api.postament.dbo
 
 import org.jetbrains.exposed.sql.Table
 
-object DBOTicket : Table() {
+object DBOTicket : Table("Ticket") {
 
     val id = integer("id")
     val title = varchar("Title", length = 500)
