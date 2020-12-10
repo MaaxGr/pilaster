@@ -1,9 +1,9 @@
 package com.pilaster.api.postament
 
 import com.pilaster.api.entities.Ticket
-import com.pilaster.api.postament.dbo.DBOProject
-import com.pilaster.api.postament.dbo.DBOTask
-import com.pilaster.api.postament.dbo.DBOTicket
+import com.pilaster.api.postament.dao.DAOProject
+import com.pilaster.api.postament.dao.DAOTask
+import com.pilaster.api.postament.dao.DAOTicket
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -30,31 +30,33 @@ class Postament {
 
     private fun createTables(){
         transaction {
-            SchemaUtils.createMissingTablesAndColumns(DBOTask)
-            SchemaUtils.createMissingTablesAndColumns(DBOTicket)
-            SchemaUtils.createMissingTablesAndColumns(DBOProject)
+            SchemaUtils.createMissingTablesAndColumns(DAOTask)
+            SchemaUtils.createMissingTablesAndColumns(DAOTicket)
+            SchemaUtils.createMissingTablesAndColumns(DAOProject)
         }
     }
 
     private fun dropTables(){
         transaction {
-            SchemaUtils.drop(DBOTicket)
-            SchemaUtils.drop(DBOTask)
-            SchemaUtils.drop(DBOProject)
+            SchemaUtils.drop(DAOTicket)
+            SchemaUtils.drop(DAOTask)
+            SchemaUtils.drop(DAOProject)
         }
     }
 
     fun getAllTickets(): List<Ticket> {
         return transaction {
-            DBOTicket.selectAll()
+            DAOTicket.selectAll()
                     .map {
                         Ticket(
-                                id = it[DBOTicket.id],
-                                description = it[DBOTicket.description]
+                                id = it[DAOTicket.id],
+                                description = it[DAOTicket.description]
                         )
                     }
         }
     }
+
+
 }
 
 fun main(){

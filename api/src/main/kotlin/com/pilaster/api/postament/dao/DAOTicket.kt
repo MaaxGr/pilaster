@@ -1,8 +1,8 @@
-package com.pilaster.api.postament.dbo
+package com.pilaster.api.postament.dao
 
 import org.jetbrains.exposed.sql.Table
 
-object DBOTicket : Table("Ticket") {
+object DAOTicket : Table("Ticket") {
 
     val id = integer("ID")
     val title = varchar("Title", length = 500)

@@ -1,8 +1,8 @@
-package com.pilaster.api.postament.dbo
+package com.pilaster.api.postament.dao
 
 import org.jetbrains.exposed.sql.Table
 
-object DBOTask : Table("Task") {
+object DAOTask : Table("Task") {
 
     val taskid = integer("Taskid")
     val tasktext = text("Text")
