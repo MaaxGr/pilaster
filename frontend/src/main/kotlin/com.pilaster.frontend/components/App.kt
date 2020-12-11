@@ -1,6 +1,7 @@
 package com.pilaster.frontend.components
 
 import com.pilaster.common.TicketList
+import com.pilaster.frontend.components.ribbonmenu.TopMenuHandler
 import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.await
@@ -33,10 +34,10 @@ class App : RComponent<RProps, AppState>() {
     override fun RBuilder.render() {
 
         // Topmenü zeichnen
-        child(TopMenu::class) {
+        child(TopMenuHandler::class) {
             //attrs.title = "Home"
         }
-
+/*
         div{
             setProp("class","border bd-default no-border-top p-2")
             div {
@@ -68,7 +69,7 @@ class App : RComponent<RProps, AppState>() {
                 }
             }
         }
-
+*/
     }
 
     private suspend fun fetchTickets(): TicketList {
