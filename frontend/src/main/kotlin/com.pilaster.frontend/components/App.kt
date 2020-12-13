@@ -2,10 +2,14 @@ package com.pilaster.frontend.components
 
 import com.pilaster.common.TicketList
 import com.pilaster.frontend.components.ribbonmenu.TopMenuHandler
+import com.pilaster.frontend.store
 import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.await
 import kotlinx.coroutines.launch
+import org.reduxkotlin.Reducer
+import org.reduxkotlin.Store
+import org.reduxkotlin.createStore
 import react.*
 import react.dom.*
 
@@ -13,7 +17,12 @@ external interface AppState: RState {
     var ticket: TicketList?
 }
 
+data class AppState2(
+        val message: String
+)
+
 class App : RComponent<RProps, AppState>() {
+
 
     override fun AppState.init() {
         console.log("fetch ticekts")
@@ -27,6 +36,11 @@ class App : RComponent<RProps, AppState>() {
                 ticket = fetchedTicket
             }
 
+
+
+        }
+        store.subscribe {
+            println("Edit: " + store.state.message)
         }
     }
 

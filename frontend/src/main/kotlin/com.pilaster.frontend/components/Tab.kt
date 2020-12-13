@@ -1,9 +1,6 @@
 package com.pilaster.frontend.components
 
-import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.RState
+import react.*
 import react.dom.a
 
 
@@ -18,6 +15,9 @@ class Tab : RComponent<TabProps, RState>() {
         a{
             setProp("href","#_home_")
             +props.title
+
+
+
         }
     }
 }
