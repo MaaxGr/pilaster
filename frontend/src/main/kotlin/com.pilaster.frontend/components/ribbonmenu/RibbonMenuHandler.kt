@@ -1,18 +1,17 @@
 package com.pilaster.frontend.components.ribbonmenu
 
-import com.pilaster.frontend.components.TabProps
 import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
 import react.dom.*
 
-external interface TopMenuProps : RProps {
+external interface RibbonMenuProps : RProps {
     //Children
     var tabSection: MutableList<RibbonTabSection>
 }
 
-class TopMenuHandler : RComponent<TabProps, RState>() {
+class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
 
     override fun RBuilder.render() {
         nav {
@@ -59,10 +58,7 @@ class TopMenuHandler : RComponent<TabProps, RState>() {
                             RibbonButtonConfig("Neu aus Vorlage", "Öffnen")
                     )
                 }
-
             }
-
         }
     }
-
 }

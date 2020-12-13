@@ -1,32 +1,25 @@
 package com.pilaster.frontend.components
 
 import com.pilaster.common.TicketList
-import com.pilaster.frontend.components.ribbonmenu.TopMenuHandler
 import com.pilaster.frontend.store
 import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.await
 import kotlinx.coroutines.launch
-import org.reduxkotlin.Reducer
-import org.reduxkotlin.Store
-import org.reduxkotlin.createStore
 import react.*
 import react.dom.*
 
 external interface AppState: RState {
     var ticket: TicketList?
+    var contentType: String
 }
 
 data class AppState2(
-        val message: String
+        val message: String,
+        val contentArea: String = "Home"
 )
 
 class App : RComponent<RProps, AppState>() {
-
-    init {
-
-    }
-
 
     override fun AppState.init() {
 
@@ -45,19 +38,28 @@ class App : RComponent<RProps, AppState>() {
                 ticket = fetchedTicket
             }
 
-
-
         }
-
     }
 
 
     override fun RBuilder.render() {
-
-        // Topmenü zeichnen
-        child(TopMenuHandler::class) {
-            //attrs.title = "Home"
+        div {
+            setProp("id","ribbonBarArea")
         }
+
+        div {
+            setProp("id","contentArea")
+        }
+
+        //render(document.getElementById("ribbonBarArea")) {
+        //    child(TopMenuHandler::class) {
+        //    }
+        //}
+
+        //Ribbon-Menü
+        //child(TopMenuHandler::class) {
+        //}
+
 
 
 /*
