@@ -3,7 +3,9 @@ package com.pilaster.frontend.components.ribbonmenu
 import com.pilaster.frontend.TestMessage
 import com.pilaster.frontend.components.AppState
 import com.pilaster.frontend.store
+import kotlinx.browser.window
 import kotlinx.html.js.onClickFunction
+import kotlinx.html.js.onDoubleClickFunction
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -17,6 +19,7 @@ external interface RibbonButtonProps : RProps {
 
 class RibbonButton : RComponent<RibbonButtonProps,AppState>() {
     override fun RBuilder.render() {
+
         button {
             setProp("class","ribbon-button")
             span {
@@ -28,9 +31,8 @@ class RibbonButton : RComponent<RibbonButtonProps,AppState>() {
             }
             attrs {
                 onClickFunction = {
-                    store.dispatch {
-                        TestMessage("bla")
-                    }
+                    store.dispatch(props.buttonSays)
+                    window.alert("Aktion ausgeführt!")
                 }
             }
         }

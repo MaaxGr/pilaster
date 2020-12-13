@@ -23,8 +23,17 @@ data class AppState2(
 
 class App : RComponent<RProps, AppState>() {
 
+    init {
+
+    }
+
 
     override fun AppState.init() {
+
+        store.subscribe {
+            println("Edit: " + store.state.message)
+        }
+
         console.log("fetch ticekts")
         MainScope().launch {
 
@@ -39,9 +48,7 @@ class App : RComponent<RProps, AppState>() {
 
 
         }
-        store.subscribe {
-            println("Edit: " + store.state.message)
-        }
+
     }
 
 
@@ -51,6 +58,8 @@ class App : RComponent<RProps, AppState>() {
         child(TopMenuHandler::class) {
             //attrs.title = "Home"
         }
+
+
 /*
         div{
             setProp("class","border bd-default no-border-top p-2")
