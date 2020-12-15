@@ -36,6 +36,9 @@ dependencies {
 
     //Coroutines (chapter 8)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+
+    // Können wir verwenden, wenn wir mal soweit sind XD
+//    implementation(npm("metro4", "~4.4.2"))
 }
 
 kotlin {
