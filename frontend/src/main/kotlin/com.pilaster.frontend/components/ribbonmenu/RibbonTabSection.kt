@@ -24,7 +24,7 @@ class RibbonTabSection : RComponent<RibbonTabSectionProps, AppState>() {
                 if (!props.buttons.isNullOrEmpty()) {
                     props.buttons.forEach {
                         child(RibbonButton::class) {
-                            attrs.buttonSays = it.buttonSays
+                            attrs.buttonConfig = it
                         }
                     }
                 }

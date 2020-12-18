@@ -17,9 +17,9 @@ class ContentHandler : RComponent<ContentHandlerProps, ContentHandlerState>() {
     override fun RBuilder.render() {
 
         store.subscribe {
-            println("ContentHandler: " + store.state.contentArea)
+            //println("ContentHandler: " + store.state.contentArea)
             setState{
-                renderContent = store.state.contentArea
+            //    renderContent = store.state.contentArea
             }
             //props.renderContent = store.state.contentArea
         }

@@ -1,17 +1,19 @@
 package com.pilaster.frontend
 
-import com.pilaster.frontend.components.AppState2
+import com.pilaster.frontend.components.state.AppState
+import com.pilaster.frontend.components.state.CharmsState
 import org.reduxkotlin.*
 
-val state2 = AppState2("leer", "Home")
-val reducer: Reducer<AppState2> = { state , action ->
-
+val state2 = AppState()
+val reducer: Reducer<AppState> = { state , action ->
+    state
+    /*
     if (action is String) {
-        AppState2(action, action)
+        AppState(CharmsState(open=true), "")
     } else {
         state
     }
-
+*/
 }
-val thunk = createThunkMiddleware<AppState2>()
+val thunk = createThunkMiddleware<AppState>()
 val store = createStore(reducer, state2, applyMiddleware(thunk))

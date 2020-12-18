@@ -1,6 +1,7 @@
 package com.pilaster.frontend
 
 import com.pilaster.frontend.components.App
+import com.pilaster.frontend.components.charms.CharmsHandler
 import com.pilaster.frontend.components.content.ContentHandler
 import com.pilaster.frontend.components.ribbonmenu.RibbonMenuHandler
 import kotlinx.browser.document
@@ -19,6 +20,11 @@ fun main() {
 
     render(document.getElementById("contentArea")) {
         child(ContentHandler::class) {
+        }
+    }
+
+    render(document.getElementById("charmsArea")){
+        child(CharmsHandler::class){
         }
     }
 

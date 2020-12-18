@@ -1,18 +1,20 @@
 package com.pilaster.frontend.components.ribbonmenu
 
 import com.pilaster.frontend.components.AppState
-import kotlinx.browser.window
+import com.pilaster.frontend.components.CharmsEnum
 import kotlinx.html.js.onClickFunction
 import com.pilaster.frontend.store
+import kotlinx.html.onClick
 import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.dom.button
+import react.dom.script
 import react.dom.span
 
 
 external interface RibbonButtonProps : RProps {
-    var buttonSays: String
+    var buttonConfig: RibbonButtonConfig
 }
 
 class RibbonButton : RComponent<RibbonButtonProps,AppState>() {
@@ -25,13 +27,11 @@ class RibbonButton : RComponent<RibbonButtonProps,AppState>() {
             }
             span {
                 setProp("class","caption")
-                +props.buttonSays
+                +props.buttonConfig.buttonSays
             }
             attrs {
                 onClickFunction = {
-                    //store.dispatch(props.buttonSays)
-                    store.dispatch("Ticket")
-                    //window.alert("Aktion ausgeführt!")
+                    props.buttonConfig.onClickAction.invoke()
                 }
             }
         }

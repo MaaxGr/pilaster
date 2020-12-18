@@ -14,17 +14,12 @@ external interface AppState: RState {
     var contentType: String
 }
 
-data class AppState2(
-        val message: String,
-        val contentArea: String = "Home"
-)
-
 class App : RComponent<RProps, AppState>() {
 
     override fun AppState.init() {
 
         store.subscribe {
-            println("Edit: " + store.state.message)
+            //println("Edit: " + store.state.message)
         }
 
         console.log("fetch ticekts")
@@ -43,13 +38,21 @@ class App : RComponent<RProps, AppState>() {
 
 
     override fun RBuilder.render() {
+
+
         div {
             setProp("id","ribbonBarArea")
         }
 
         div {
-            setProp("id","contentArea")
+            setProp("id", "contentArea")
         }
+
+        div {
+            setProp("id", "charmsArea")
+        }
+
+
 
         //render(document.getElementById("ribbonBarArea")) {
         //    child(TopMenuHandler::class) {

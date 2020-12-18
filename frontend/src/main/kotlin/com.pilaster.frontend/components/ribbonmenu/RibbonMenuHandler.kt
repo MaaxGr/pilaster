@@ -1,5 +1,7 @@
 package com.pilaster.frontend.components.ribbonmenu
 
+import com.pilaster.frontend.components.CharmsEnum
+import com.pilaster.frontend.store
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -36,6 +38,12 @@ class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
                     attrs.isStatic = false
                     attrs.targetSection = "_section_tickets_"
                 }
+
+                child(RibbonTab::class){
+                    attrs.title = "Ansicht"
+                    attrs.isStatic = false
+                    attrs.targetSection = "_section_ansicht_"
+                }
             }
 
 
@@ -45,6 +53,10 @@ class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
 
                 child(RibbonTabSection::class) {
                     attrs.section = "_section_projects_"
+                    attrs.buttons = listOf(
+                        RibbonButtonConfig("Projekte anzeigen", "Anzeige"),
+                        RibbonButtonConfig("Neues Projekt", "Neu")
+                    )
                     //attrs.buttons = listOf(RibbonButtonConfig("A"))
                 }
 
@@ -56,6 +68,18 @@ class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
                             RibbonButtonConfig("Mir Zugewiesen", "Öffnen"),
                             RibbonButtonConfig("Neu (blanko)", "Öffnen"),
                             RibbonButtonConfig("Neu aus Vorlage", "Öffnen")
+                    )
+                }
+
+                child(RibbonTabSection::class){
+                    attrs.section = "_section_ansicht_"
+                    attrs.buttons = listOf(
+                        RibbonButtonConfig("Taskbar",
+                            "",
+                            onClickAction={
+                                store.state.charms[CharmsEnum.TASKBAR]?.toggleOpen()
+                                store.dispatch("Fu")
+                            })
                     )
                 }
             }
