@@ -6,4 +6,5 @@ class AppState {
     var charms:MutableMap<CharmsEnum,CharmsState> = mutableMapOf(
         CharmsEnum.TASKBAR to CharmsState()
     )
+    var contentArea:String = ""
 }

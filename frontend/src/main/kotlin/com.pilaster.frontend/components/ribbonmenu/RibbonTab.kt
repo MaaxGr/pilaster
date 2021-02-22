@@ -5,7 +5,6 @@ import com.pilaster.frontend.store
 import kotlinx.browser.window
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.js.onDoubleClickFunction
-import kotlinx.html.onDoubleClick
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -38,12 +37,27 @@ class RibbonTab : RComponent<RibbonTabProps, AppState>() {
                     }
                 }
 
-                if(props.title == "Home"){
-                    store.dispatch("Home")
+                when(props.title) {
+                    //if(props.title == "Home"){
+                    "Home" -> {
+                        //store.state.contentArea = "Home"
+                        //store.dispatch("Dummy")
 
-                    attrs{
-                        onClickFunction={
-                            store.dispatch("Home")
+                        attrs {
+                            onClickFunction = {
+                                store.state.contentArea = "Home"
+                                store.dispatch("Dummy")
+                            }
+                        }
+                    }
+                    "Tickets" ->{
+                        //store.state.contentArea = "Ticket"
+                        //store.dispatch("Dummy")
+                        attrs {
+                            onClickFunction = {
+                                store.state.contentArea = "Ticket"
+                                store.dispatch("Dummy")
+                            }
                         }
                     }
                 }

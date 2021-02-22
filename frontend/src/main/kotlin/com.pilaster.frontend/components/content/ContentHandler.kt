@@ -19,7 +19,7 @@ class ContentHandler : RComponent<ContentHandlerProps, ContentHandlerState>() {
         store.subscribe {
             //println("ContentHandler: " + store.state.contentArea)
             setState{
-            //    renderContent = store.state.contentArea
+                renderContent = store.state.contentArea
             }
             //props.renderContent = store.state.contentArea
         }
@@ -31,7 +31,6 @@ class ContentHandler : RComponent<ContentHandlerProps, ContentHandlerState>() {
             +state.renderContent
         }
 
-
         when (state.renderContent) {
             "Home" -> {
                 child(ContentHome::class) {}
@@ -41,10 +40,6 @@ class ContentHandler : RComponent<ContentHandlerProps, ContentHandlerState>() {
             }
 
         }
-
-
-
-
 
 
     }

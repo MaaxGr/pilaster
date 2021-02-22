@@ -7,7 +7,7 @@ import org.reduxkotlin.*
 val state2 = AppState()
 val reducer: Reducer<AppState> = { state , action ->
     state
-    /*
+/*
     if (action is String) {
         AppState(CharmsState(open=true), "")
     } else {

@@ -37,11 +37,11 @@ class CharmsHandler : RComponent<CharmsHandlerProps, CharmsHandlerState>() {
 
 
 
-
+            +"Offene Fenster:"
             div {
 
                 setProp("class", "container")
-                +"Offene Fenster:"
+
                 button {
                     +"Knopf 1"
                 }

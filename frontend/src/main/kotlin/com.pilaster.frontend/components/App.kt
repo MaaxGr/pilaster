@@ -1,7 +1,9 @@
 package com.pilaster.frontend.components
 
 import com.pilaster.common.TicketList
+import com.pilaster.frontend.components.window.WindowHandler
 import com.pilaster.frontend.store
+import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.await
@@ -46,11 +48,18 @@ class App : RComponent<RProps, AppState>() {
 
         div {
             setProp("id", "contentArea")
+
+
         }
 
         div {
             setProp("id", "charmsArea")
         }
+
+
+            child(WindowHandler::class) {
+            }
+
 
 
 

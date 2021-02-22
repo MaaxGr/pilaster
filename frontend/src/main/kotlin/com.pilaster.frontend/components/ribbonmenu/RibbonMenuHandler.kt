@@ -79,7 +79,12 @@ class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
                             onClickAction={
                                 store.state.charms[CharmsEnum.TASKBAR]?.toggleOpen()
                                 store.dispatch("Fu")
-                            })
+                            }),
+                        RibbonButtonConfig("Neues Fenster",
+                        "",
+                        onClickAction = {
+
+                        })
                     )
                 }
             }
