@@ -26,10 +26,10 @@ class ContentHandler : RComponent<ContentHandlerProps, ContentHandlerState>() {
 
 
 
-        h3 {
-            +"Das ist der Content: "
-            +state.renderContent
-        }
+//        h3 {
+//            +"Das ist der Content: "
+//            +state.renderContent
+//        }
 
         when (state.renderContent) {
             "Home" -> {
@@ -37,6 +37,9 @@ class ContentHandler : RComponent<ContentHandlerProps, ContentHandlerState>() {
             }
             "Ticket" -> {
                 child(ContentTicket::class) {}
+            }
+            "Project" -> {
+                child(ContentProject::class) {}
             }
 
         }

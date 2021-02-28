@@ -60,6 +60,14 @@ class RibbonTab : RComponent<RibbonTabProps, AppState>() {
                             }
                         }
                     }
+                    "Projekte" -> {
+                        attrs {
+                            onClickFunction = {
+                                store.state.contentArea = "Project"
+                                store.dispatch("Dummy")
+                            }
+                        }
+                    }
                 }
 
             }
