@@ -8,8 +8,11 @@ import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.await
 import kotlinx.coroutines.launch
+import kotlinx.css.*
 import react.*
 import react.dom.*
+import styled.css
+import styled.styledDiv
 
 external interface AppState: RState {
     var ticket: TicketList?
@@ -41,26 +44,50 @@ class App : RComponent<RProps, AppState>() {
 
     override fun RBuilder.render() {
 
-
-        div {
-            setProp("id","ribbonBarArea")
+        styledDiv {
+            setProp("id","Kopf")
+            css {
+                position = Position.relative
+            }
+            div {
+                setProp("id","ribbonBarArea")
+            }
         }
 
-        div {
-            setProp("id", "contentArea")
+        styledDiv {
+            setProp("id","content-collection")
+            css {
+                position = Position.relative
+                minHeight = 100.pct
+            }
+            styledDiv {
+                setProp("id", "contentArea")
+                css {
+                    minHeight = 100.pct
+                    minWidth = 100.pct
+                    position = Position.absolute
+                }
+            }
 
+            styledDiv{
+                setProp("id","windowArea")
+                //setProp("class","container")
+                css {
+                    minHeight = 100.pct
+                    minWidth = 100.pct
+                    position = Position.absolute
+                }
 
+                child(WindowHandler::class) {
+                }
+            }
         }
+
+
 
         div {
             setProp("id", "charmsArea")
         }
-
-
-            child(WindowHandler::class) {
-            }
-
-
 
 
         //render(document.getElementById("ribbonBarArea")) {
