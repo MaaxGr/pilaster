@@ -1,6 +1,6 @@
 package com.pilaster.frontend.components.content
 
-import com.pilaster.frontend.components.AppState
+import com.pilaster.frontend.AppState
 import kotlinx.css.*
 import react.RBuilder
 import react.RComponent

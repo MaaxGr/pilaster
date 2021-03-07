@@ -1,8 +1,8 @@
-package com.pilaster.frontend.components
+package com.pilaster.frontend
 
 import com.pilaster.common.TicketList
 import com.pilaster.frontend.components.window.WindowHandler
-import com.pilaster.frontend.store
+import com.pilaster.frontend.site.login.LoginSite
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
@@ -20,6 +20,10 @@ external interface AppState: RState {
 }
 
 class App : RComponent<RProps, AppState>() {
+
+    init {
+        LoginSite().start()
+    }
 
     override fun AppState.init() {
 

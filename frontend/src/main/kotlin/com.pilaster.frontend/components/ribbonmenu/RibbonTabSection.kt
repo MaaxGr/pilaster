@@ -1,6 +1,6 @@
 package com.pilaster.frontend.components.ribbonmenu
 
-import com.pilaster.frontend.components.AppState
+import com.pilaster.frontend.AppState
 import react.RBuilder
 import react.RComponent
 import react.RProps

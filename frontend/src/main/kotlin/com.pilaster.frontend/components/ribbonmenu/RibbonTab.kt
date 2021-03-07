@@ -1,6 +1,6 @@
 package com.pilaster.frontend.components.ribbonmenu
 
-import com.pilaster.frontend.components.AppState
+import com.pilaster.frontend.AppState
 import com.pilaster.frontend.store
 import kotlinx.browser.window
 import kotlinx.html.js.onClickFunction
