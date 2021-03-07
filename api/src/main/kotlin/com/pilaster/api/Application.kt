@@ -6,8 +6,10 @@ import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
 import io.ktor.http.*
+import io.ktor.http.cio.websocket.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import io.ktor.websocket.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -40,7 +42,26 @@ fun Application.module(testing: Boolean = false) {
         header("Token")
     }
 
+    install(WebSockets){
+
+    }
+
     routing {
+
+        webSocket("/WS") {
+            for (frame in incoming) {
+                println("HUI")
+                when (frame) {
+                    is Frame.Text -> {
+                        val text = frame.readText()
+                        outgoing.send(Frame.Text("YOU SAID: $text"))
+                        if (text.equals("bye", ignoreCase = true)) {
+                            close(CloseReason(CloseReason.Codes.NORMAL, "Client said BYE"))
+                        }
+                    }
+                }
+            }
+        }
 
         get("/") {
             call.respondText { "Hello Pilaster!" }

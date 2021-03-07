@@ -4,6 +4,7 @@ import com.pilaster.frontend.site.login.form.LoginFrm
 import kotlinx.browser.document
 import kotlinx.css.*
 import kotlinx.html.DIV
+import org.w3c.dom.WebSocket
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -14,6 +15,43 @@ import styled.styledDiv
 import styled.styledSpan
 
 class LoginSite : RComponent<RProps,RState>() {
+
+    fun start(){
+        render(document.getElementById("root")) {
+            child(LoginSite::class) {}
+        }
+        renderLogo("LoginLogo")
+
+        println("----- Jetzt kommt der Websocket ------")
+        //Todo: Verschlüsseln (wss://)
+        val testWS = WebSocket(url = "ws://localhost:8448/WS")
+
+        testWS.onopen = {
+            println("Geöffnet")
+            testWS.send("Hallo!")
+        }
+
+        testWS.onmessage = {
+            println("Nachricht")
+            println(it.data)
+        }
+
+        testWS.onerror = {
+            println("FEHLER!")
+        }
+
+        testWS.onclose = {
+            println("Geschlossen")
+        }
+
+
+
+
+
+
+    }
+
+
 
     override fun RBuilder.render() {
 
@@ -27,19 +65,9 @@ class LoginSite : RComponent<RProps,RState>() {
                     margin = "0 auto"
                 }
             }
-
             child(LoginFrm::class){}
-
-
         }
 
-    }
-
-    fun start(){
-        render(document.getElementById("root")) {
-            child(LoginSite::class) {}
-        }
-        renderLogo("LoginLogo")
     }
 
     fun renderLogo(targetId: String) {
@@ -69,7 +97,4 @@ class LoginSite : RComponent<RProps,RState>() {
             }
         }
     }
-
-
-
 }

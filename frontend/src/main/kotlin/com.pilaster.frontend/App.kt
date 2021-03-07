@@ -31,18 +31,18 @@ class App : RComponent<RProps, AppState>() {
             //println("Edit: " + store.state.message)
         }
 
-        console.log("fetch ticekts")
-        MainScope().launch {
-
-            val fetchedTicket = fetchTickets()
-
-            println("Ticket: $fetchedTicket")
-
-            setState {
-                ticket = fetchedTicket
-            }
-
-        }
+//        console.log("fetch ticekts")
+//        MainScope().launch {
+//
+//            val fetchedTicket = fetchTickets()
+//
+//            println("Ticket: $fetchedTicket")
+//
+//            setState {
+//                ticket = fetchedTicket
+//            }
+//
+//        }
     }
 
 
