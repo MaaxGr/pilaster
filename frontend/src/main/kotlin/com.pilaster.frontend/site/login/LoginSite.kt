@@ -1,10 +1,9 @@
 package com.pilaster.frontend.site.login
 
+import com.pilaster.frontend.handler.ConnHandler
 import com.pilaster.frontend.site.login.form.LoginFrm
 import kotlinx.browser.document
 import kotlinx.css.*
-import kotlinx.html.DIV
-import org.w3c.dom.WebSocket
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -22,32 +21,7 @@ class LoginSite : RComponent<RProps,RState>() {
         }
         renderLogo("LoginLogo")
 
-        println("----- Jetzt kommt der Websocket ------")
-        //Todo: Verschlüsseln (wss://)
-        val testWS = WebSocket(url = "ws://localhost:8448/WS")
-
-        testWS.onopen = {
-            println("Geöffnet")
-            testWS.send("Hallo!")
-        }
-
-        testWS.onmessage = {
-            println("Nachricht")
-            println(it.data)
-        }
-
-        testWS.onerror = {
-            println("FEHLER!")
-        }
-
-        testWS.onclose = {
-            println("Geschlossen")
-        }
-
-
-
-
-
+        ConnHandler.sendRequest("Hallo Du!")
 
     }
 

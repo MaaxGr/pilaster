@@ -2,6 +2,7 @@ package com.pilaster.frontend
 
 import com.pilaster.common.TicketList
 import com.pilaster.frontend.components.window.WindowHandler
+import com.pilaster.frontend.handler.ConnHandler
 import com.pilaster.frontend.site.login.LoginSite
 import kotlinx.browser.document
 import kotlinx.browser.window
@@ -22,7 +23,10 @@ external interface AppState: RState {
 class App : RComponent<RProps, AppState>() {
 
     init {
-        LoginSite().start()
+        ConnHandler.connectToBackend() {
+
+            LoginSite().start()
+        }
     }
 
     override fun AppState.init() {
