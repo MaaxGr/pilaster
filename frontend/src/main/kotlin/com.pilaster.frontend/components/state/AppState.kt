@@ -7,4 +7,7 @@ class AppState {
         CharmsEnum.TASKBAR to CharmsState()
     )
     var contentArea:String = ""
+
+    // Allgemeine Statusinfos über die Verbindung zum Backend
+    val backend = BackendState()
 }

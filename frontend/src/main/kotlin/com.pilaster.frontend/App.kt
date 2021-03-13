@@ -23,10 +23,7 @@ external interface AppState: RState {
 class App : RComponent<RProps, AppState>() {
 
     init {
-        ConnHandler.connectToBackend() {
-
-            LoginSite().start()
-        }
+        LoginSite().start()
     }
 
     override fun AppState.init() {

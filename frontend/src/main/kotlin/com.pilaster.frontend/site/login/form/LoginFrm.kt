@@ -1,15 +1,24 @@
 package com.pilaster.frontend.site.login.form
 
+import com.pilaster.frontend.store
 import kotlinx.css.div
 import kotlinx.html.InputType
-import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.RState
+import react.*
 import react.dom.*
 
-class LoginFrm: RComponent<RProps, RState>() {
+external interface LoginFromState : RState{
+    var backendConnection: Boolean
+}
+
+class LoginFrm: RComponent<RProps, LoginFromState>() {
     override fun RBuilder.render() {
+
+        store.subscribe {
+            setState {
+            backendConnection = store.state.backend.isConnected
+            }
+        }
+
         div (){
             setProp("id", "loginFrm")
             form {
@@ -39,9 +48,15 @@ class LoginFrm: RComponent<RProps, RState>() {
                     }
                 }
                 div(classes = "form-group"){
+
                     button(classes = "button success") {
                         + "Anmelden"
                         setProp("type","button")
+                        if (state.backendConnection) {
+                            setProp("class", "button success")
+                        } else {
+                            setProp("class", "button alert disabled")
+                        }
                     }
                 }
             }
