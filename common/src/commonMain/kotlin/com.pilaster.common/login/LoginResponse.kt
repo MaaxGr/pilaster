@@ -1,4 +1,6 @@
 package com.pilaster.common.login
 
-class LoginResponse {
-}
+data class LoginResponse (
+        val succeeded : Boolean,
+        val accessToken: String
+        )

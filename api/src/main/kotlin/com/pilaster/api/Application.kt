@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.pilaster.api.postament.Postament
 import com.pilaster.common.CommHead
 import com.pilaster.common.TicketList
+import com.pilaster.common.login.LoginRequest
 import com.pilaster.common.login.SaltRequest
 import com.pilaster.common.login.SaltResponse
 import io.ktor.application.*
@@ -64,12 +65,24 @@ fun Application.module(testing: Boolean = false) {
 
                         when(request.type){
                             "SALT"->{
-                                //val response = CommHead(request.clientID,"SALT_RESPONSE","SALT",SaltResponse(AuthHandler.createSalt((request.commBody as SaltRequest).username)))
-                                val salt = AuthHandler.createSalt((request.commBody as SaltRequest).username)
-                                //val salt = "";
+                                val salt = AuthHandler.createSalt(Gson().fromJson(Gson().toJson(request.commBody),SaltRequest::class.java).username)
                                 val response = CommHead(request.clientID,"SALT_RESPONSE","SALT",SaltResponse(salt))
                                 println(response)
                                 outgoing.send(Frame.Text(Gson().toJson(response,CommHead::class.java)))
+
+                            }
+                            "LOGIN"->{
+                                val response = CommHead(
+                                    request.clientID,
+                                    "LOGIN_RESPONSE",
+                                    "LOGIN",
+                                    AuthHandler.authUser(
+                                        (Gson().fromJson(Gson().toJson(request.commBody),LoginRequest::class.java)).username
+                                        ,(Gson().fromJson(Gson().toJson(request.commBody),LoginRequest::class.java)).password
+                                    )
+                                )
+
+                                outgoing.send(Frame.Text(Gson().toJson(response, CommHead::class.java)))
 
                             }
                             else -> {
@@ -77,12 +90,6 @@ fun Application.module(testing: Boolean = false) {
                                 println(text)
                             }
                         }
-
-                        /*val text = frame.readText()
-                        outgoing.send(Frame.Text("YOU SAID: $text"))
-                        if (text.equals("bye", ignoreCase = true)) {
-                            close(CloseReason(CloseReason.Codes.NORMAL, "Client said BYE"))
-                        }*/
                     }
                 }
             }
