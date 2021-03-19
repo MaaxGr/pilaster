@@ -1,7 +1,11 @@
 package com.pilaster.api
 
+import com.google.gson.Gson
 import com.pilaster.api.postament.Postament
+import com.pilaster.common.CommHead
 import com.pilaster.common.TicketList
+import com.pilaster.common.login.SaltRequest
+import com.pilaster.common.login.SaltResponse
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
@@ -53,11 +57,32 @@ fun Application.module(testing: Boolean = false) {
                 println("HUI")
                 when (frame) {
                     is Frame.Text -> {
+
                         val text = frame.readText()
+                        println(text)
+                        val request = Gson().fromJson(text,CommHead::class.java)
+
+                        when(request.type){
+                            "SALT"->{
+                                //val response = CommHead(request.clientID,"SALT_RESPONSE","SALT",SaltResponse(AuthHandler.createSalt((request.commBody as SaltRequest).username)))
+                                val salt = AuthHandler.createSalt((request.commBody as SaltRequest).username)
+                                //val salt = "";
+                                val response = CommHead(request.clientID,"SALT_RESPONSE","SALT",SaltResponse(salt))
+                                println(response)
+                                outgoing.send(Frame.Text(Gson().toJson(response,CommHead::class.java)))
+
+                            }
+                            else -> {
+                                println("Request konnte nicht interpretiert werden!")
+                                println(text)
+                            }
+                        }
+
+                        /*val text = frame.readText()
                         outgoing.send(Frame.Text("YOU SAID: $text"))
                         if (text.equals("bye", ignoreCase = true)) {
                             close(CloseReason(CloseReason.Codes.NORMAL, "Client said BYE"))
-                        }
+                        }*/
                     }
                 }
             }

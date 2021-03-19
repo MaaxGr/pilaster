@@ -21,7 +21,7 @@ class LoginSite : RComponent<RProps,RState>() {
         }
         renderLogo("LoginLogo")
 
-        ConnHandler.sendRequest("Hallo Du!")
+
 
     }
 

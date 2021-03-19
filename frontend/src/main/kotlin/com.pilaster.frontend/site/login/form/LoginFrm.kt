@@ -1,8 +1,11 @@
 package com.pilaster.frontend.site.login.form
 
+import com.pilaster.frontend.handler.AuthHandler
 import com.pilaster.frontend.store
-import kotlinx.css.div
+import kotlinx.browser.document
 import kotlinx.html.InputType
+import kotlinx.html.js.onClickFunction
+import org.w3c.dom.HTMLInputElement
 import react.*
 import react.dom.*
 
@@ -19,7 +22,7 @@ class LoginFrm: RComponent<RProps, LoginFromState>() {
             }
         }
 
-        div (){
+        div {
             setProp("id", "loginFrm")
             form {
                 div {
@@ -27,10 +30,9 @@ class LoginFrm: RComponent<RProps, LoginFromState>() {
                     label {
                         +"Anmeldename"
                     }
-                    input(type = InputType.button) {
-
+                    input(classes = "metro-input"){
+                        setProp("id","username")
                         setProp("type", "text")
-                        setProp("class", "metro-input")
                         setProp("data-role","input")
                         setProp("data-prepend","<span class='mif-user'></span>")
                     }
@@ -41,6 +43,7 @@ class LoginFrm: RComponent<RProps, LoginFromState>() {
                         +"Kennwort"
                     }
                     input {
+                        setProp("id","secret")
                         setProp("type","password")
                         setProp("class","metro-input")
                         setProp("data-role","input")
@@ -50,13 +53,27 @@ class LoginFrm: RComponent<RProps, LoginFromState>() {
                 div(classes = "form-group"){
 
                     button(classes = "button success") {
-                        + "Anmelden"
                         setProp("type","button")
                         if (state.backendConnection) {
+                            + "Anmelden"
                             setProp("class", "button success")
+                            attrs{
+                                onClickFunction= {
+                                    AuthHandler.performLogin(
+                                        (document.getElementById("username") as HTMLInputElement).value,
+                                        (document.getElementById("secret") as HTMLInputElement).value
+                                    )
+                                }
+                            }
                         } else {
+                            + "Anmelden"
                             setProp("class", "button alert disabled")
                         }
+                    }
+
+                    if (!state.backendConnection){
+                        br {  }
+                        small(classes = "text-muted") { + "Anmeldung nicht möglich: Backend nicht erreichbar" }
                     }
                 }
             }

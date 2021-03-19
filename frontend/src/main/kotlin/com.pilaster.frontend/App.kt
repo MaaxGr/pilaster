@@ -23,6 +23,7 @@ external interface AppState: RState {
 class App : RComponent<RProps, AppState>() {
 
     init {
+        ConnHandler.dummy()
         LoginSite().start()
     }
 
