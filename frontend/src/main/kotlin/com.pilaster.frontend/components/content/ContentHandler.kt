@@ -32,6 +32,9 @@ class ContentHandler : RComponent<ContentHandlerProps, ContentHandlerState>() {
             "Project" -> {
                 child(ContentProject::class) {}
             }
+            "TicketDetail" -> {
+                child(ContentTicketDetail::class) {}
+            }
 
         }
 
