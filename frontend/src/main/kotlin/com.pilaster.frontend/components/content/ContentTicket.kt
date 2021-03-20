@@ -1,14 +1,14 @@
 package com.pilaster.frontend.components.content
 
-import com.pilaster.frontend.AppState
 import com.pilaster.frontend.store
 import kotlinx.html.js.onDoubleClickFunction
 import react.RBuilder
 import react.RComponent
 import react.RProps
+import react.RState
 import react.dom.*
 
-class ContentTicket : RComponent<RProps, AppState>() {
+class ContentTicket : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
 
         table("table row-hover") {

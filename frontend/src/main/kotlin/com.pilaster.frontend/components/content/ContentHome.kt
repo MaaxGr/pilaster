@@ -1,12 +1,12 @@
 package com.pilaster.frontend.components.content
 
-import com.pilaster.frontend.AppState
 import react.RBuilder
 import react.RComponent
 import react.RProps
+import react.RState
 import react.dom.div
 
-class ContentHome : RComponent<RProps, AppState>() {
+class ContentHome : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
 
         div {

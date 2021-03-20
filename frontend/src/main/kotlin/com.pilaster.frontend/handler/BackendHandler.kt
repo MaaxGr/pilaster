@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import org.w3c.dom.WebSocket
 import kotlin.coroutines.CoroutineContext
 
-object ConnHandler : CoroutineScope{
+class BackendHandler : CoroutineScope{
 
     private var isConnected:Boolean = false
     private val job = Job()
@@ -28,10 +28,6 @@ object ConnHandler : CoroutineScope{
         launch{
             connectionLoop()
         }
-    }
-
-    fun dummy():String{
-        return "Dummy"
     }
 
     fun connectToBackend(){
@@ -64,12 +60,7 @@ object ConnHandler : CoroutineScope{
             } catch (ex:Exception){
                 console.log(ex.message)
             }
-
-
-
         }
-
-
     }
 
     fun sendRequest(request:CommHead){

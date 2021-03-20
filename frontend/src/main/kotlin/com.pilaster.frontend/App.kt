@@ -1,98 +1,224 @@
 package com.pilaster.frontend
 
-import com.pilaster.common.TicketList
+import com.pilaster.frontend.components.charms.CharmsHandler
+import com.pilaster.frontend.components.content.ContentHandler
+import com.pilaster.frontend.components.ribbonmenu.RibbonMenuHandler
+import com.pilaster.frontend.components.state.AppstateHandler
+import com.pilaster.frontend.components.state.AppstatePhase
 import com.pilaster.frontend.components.window.WindowHandler
-import com.pilaster.frontend.handler.ConnHandler
+import com.pilaster.frontend.handler.AuthentificationHandler
+import com.pilaster.frontend.handler.BackendHandler
+import com.pilaster.frontend.handler.SessionHandler
 import com.pilaster.frontend.site.login.LoginSite
 import kotlinx.browser.document
-import kotlinx.browser.window
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.await
-import kotlinx.coroutines.launch
 import kotlinx.css.*
-import react.*
-import react.dom.*
+import react.dom.div
+import react.dom.render
 import styled.css
 import styled.styledDiv
 
-external interface AppState: RState {
-    var ticket: TicketList?
-    var contentType: String
-}
 
-class App : RComponent<RProps, AppState>() {
+class App {
 
-    init {
-        ConnHandler.dummy()
-        LoginSite().start()
+    companion object {
+        val appstate = AppstateHandler()
+        val backend = BackendHandler()
+        val session = SessionHandler()
+        val authentification = AuthentificationHandler()
     }
 
-    override fun AppState.init() {
+    init {
+        appstate.store.subscribe() {
+            onStateChange()
+        }
+        appstate.store.dispatch("Init")
 
-        store.subscribe {
-            //println("Edit: " + store.state.message)
+    }
+
+    private fun onStateChange() {
+        println("Statechange => ${appstate.store.state}")
+
+        when (appstate.store.state.phase) {
+            AppstatePhase.LOGIN -> {
+                createLoginStructure()
+            }
+            AppstatePhase.MAIN -> {
+                createMainStructure()
+            }
+        }
+    }
+
+    private fun createLoginStructure() {
+        render(document.getElementById("root")) {
+            child(LoginSite::class) {}
         }
 
-//        console.log("fetch ticekts")
-//        MainScope().launch {
-//
-//            val fetchedTicket = fetchTickets()
-//
-//            println("Ticket: $fetchedTicket")
-//
-//            setState {
-//                ticket = fetchedTicket
-//            }
-//
-//        }
+    }
+
+    private fun createMainStructure() {
+        render(document.getElementById("root")) {
+            styledDiv {
+                setProp("id", "Kopf")
+                css {
+                    position = Position.relative
+                }
+                div {
+                    setProp("id", "ribbonBarArea")
+                }
+            }
+
+            styledDiv {
+                setProp("id", "content-collection")
+                css {
+                    position = Position.relative
+                    minHeight = 100.pct
+                }
+                styledDiv {
+                    setProp("id", "contentArea")
+                    css {
+                        minHeight = 100.pct
+                        minWidth = 100.pct
+                        position = Position.absolute
+                    }
+                }
+
+                styledDiv {
+                    setProp("id", "windowArea")
+                    //setProp("class","container")
+                    css {
+                        minHeight = 100.pct
+                        minWidth = 100.pct
+                        position = Position.absolute
+                    }
+
+                    child(WindowHandler::class) {
+                    }
+                }
+            }
+
+
+
+            div {
+                setProp("id", "charmsArea")
+            }
+
+        }
+        render(document.getElementById("ribbonBarArea")) {
+            child(RibbonMenuHandler::class) {
+            }
+        }
+
+        render(document.getElementById("contentArea")) {
+            child(ContentHandler::class) {
+            }
+        }
+
+        render(document.getElementById("charmsArea")) {
+            child(CharmsHandler::class) {
+            }
+        }
+
+    }
+
+}
+
+//class App : RComponent<RProps, AppState>() {
+//external interface AppState: RState {
+//    var ticket: TicketList?
+//    var contentType: String
+//    var loggedIn: Boolean
+//}
+
+/*
+    override fun AppState.init() {
+
+
+        store.subscribe {
+            setState {
+                loggedIn = store.state.loggedIn
+            }
+        }
     }
 
 
     override fun RBuilder.render() {
 
-        styledDiv {
-            setProp("id","Kopf")
-            css {
-                position = Position.relative
-            }
-            div {
-                setProp("id","ribbonBarArea")
-            }
-        }
+        when (store.state.phase){
 
-        styledDiv {
-            setProp("id","content-collection")
-            css {
-                position = Position.relative
-                minHeight = 100.pct
-            }
-            styledDiv {
-                setProp("id", "contentArea")
-                css {
-                    minHeight = 100.pct
-                    minWidth = 100.pct
-                    position = Position.absolute
+            "Login"-> {
+                render(document.getElementById("root")) {
+                    child(LoginSite::class) {}
                 }
             }
 
-            styledDiv{
-                setProp("id","windowArea")
-                //setProp("class","container")
-                css {
-                    minHeight = 100.pct
-                    minWidth = 100.pct
-                    position = Position.absolute
-                }
-
-                child(WindowHandler::class) {
-                }
-            }
-        }
-
-
-
-        div {
-            setProp("id", "charmsArea")
+//            "Main"-> {
+//                styledDiv {
+//                    setProp("id", "Kopf")
+//                    css {
+//                        position = Position.relative
+//                    }
+//                    div {
+//                        setProp("id", "ribbonBarArea")
+//                    }
+//                }
+//
+//                styledDiv {
+//                    setProp("id", "content-collection")
+//                    css {
+//                        position = Position.relative
+//                        minHeight = 100.pct
+//                    }
+//                    styledDiv {
+//                        setProp("id", "contentArea")
+//                        css {
+//                            minHeight = 100.pct
+//                            minWidth = 100.pct
+//                            position = Position.absolute
+//                        }
+//                    }
+//
+//                    styledDiv {
+//                        setProp("id", "windowArea")
+//                        //setProp("class","container")
+//                        css {
+//                            minHeight = 100.pct
+//                            minWidth = 100.pct
+//                            position = Position.absolute
+//                        }
+//
+//                        child(WindowHandler::class) {
+//                        }
+//                    }
+//                }
+//
+//
+//
+//                div {
+//                    setProp("id", "charmsArea")
+//                }
+//
+//
+//                render(document.getElementById("ribbonBarArea")) {
+//                    child(RibbonMenuHandler::class) {
+//                    }
+//                }
+//
+//                render(document.getElementById("contentArea")) {
+//                    child(ContentHandler::class) {
+//                    }
+//                }
+//
+//                render(document.getElementById("charmsArea")) {
+//                    child(CharmsHandler::class) {
+//                    }
+//                }
+//
+//            }
+//
+//
+//
+//
+//
         }
 
 
@@ -140,6 +266,7 @@ class App : RComponent<RProps, AppState>() {
             }
         }
 */
+
     }
 
     private suspend fun fetchTickets(): TicketList {
@@ -153,3 +280,4 @@ class App : RComponent<RProps, AppState>() {
     }
 
 }
+*/

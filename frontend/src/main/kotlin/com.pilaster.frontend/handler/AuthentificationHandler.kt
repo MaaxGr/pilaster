@@ -1,23 +1,31 @@
 package com.pilaster.frontend.handler
 
-import com.pilaster.common.CommBody
 import com.pilaster.common.CommHead
 import com.pilaster.common.login.LoginRequest
 import com.pilaster.common.login.LoginResponse
 import com.pilaster.common.login.SaltRequest
 import com.pilaster.common.login.SaltResponse
+import com.pilaster.frontend.App
+import com.pilaster.frontend.components.state.AppstatePhase
+import com.pilaster.frontend.store
 import kotlinx.coroutines.*
-import kotlinx.css.command
 import kotlin.coroutines.CoroutineContext
 import kotlin.js.Promise
 
-object AuthHandler : CoroutineScope {
+class AuthentificationHandler : CoroutineScope {
 
     private var job: Job = Job()
 
     override val coroutineContext: CoroutineContext
-        get() = AuthHandler.job
+        get() = this.job
 
+    init{
+        if (App.session.getAccesstoken().isNotBlank()){
+            App.appstate.store.dispatch(AppstatePhase.MAIN)
+        } else {
+            App.appstate.store.dispatch(AppstatePhase.LOGIN)
+        }
+    }
 
     fun performLogin(username:String,secret:String){
         launch {
@@ -31,11 +39,16 @@ object AuthHandler : CoroutineScope {
             val accessToken = getAccessToken(username, salted.toString())
             println("AccessToken: ${accessToken.accessToken}")
 
+            if (accessToken.succeeded){
+                App.session.storeAccesstoken(accessToken.accessToken)
+                App.appstate.store.dispatch(AppstatePhase.MAIN)
+            }
+
         }
     }
 
     private suspend fun getSalt(username:String) : String{
-        ConnHandler.sendRequest(
+        App.backend.sendRequest(
             CommHead(
                 "SALT",
                 "",
@@ -49,7 +62,7 @@ object AuthHandler : CoroutineScope {
         var result : CommHead? = null
 
         while (result == null){
-            result = ConnHandler.antworten.lastOrNull{ commHead: CommHead -> commHead.type == "SALT" }
+            result = App.backend.antworten.lastOrNull{ commHead: CommHead -> commHead.type == "SALT" }
             delay(100)
         }
 
@@ -61,7 +74,7 @@ object AuthHandler : CoroutineScope {
     }
 
     private suspend fun getAccessToken(username:String, password:String): LoginResponse{
-        ConnHandler.sendRequest(
+        App.backend.sendRequest(
             CommHead(
                 "LOGIN",
                 "",
@@ -76,7 +89,7 @@ object AuthHandler : CoroutineScope {
         var result : CommHead? = null
 
         while (result == null){
-            result = ConnHandler.antworten.lastOrNull{ commHead: CommHead -> commHead.type == "LOGIN" }
+            result = App.backend.antworten.lastOrNull{ commHead: CommHead -> commHead.type == "LOGIN" }
             delay(100)
         }
 

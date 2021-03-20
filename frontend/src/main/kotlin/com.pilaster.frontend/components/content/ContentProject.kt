@@ -1,15 +1,15 @@
 package com.pilaster.frontend.components.content
 
-import com.pilaster.frontend.AppState
 import kotlinx.css.*
 import react.RBuilder
 import react.RComponent
 import react.RProps
+import react.RState
 import react.dom.*
 import styled.css
 import styled.styledDiv
 
-class ContentProject : RComponent<RProps, AppState>() {
+class ContentProject : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
         h1{
             +"Hier sind die Projekte"

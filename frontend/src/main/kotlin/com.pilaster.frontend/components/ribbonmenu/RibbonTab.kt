@@ -1,6 +1,5 @@
 package com.pilaster.frontend.components.ribbonmenu
 
-import com.pilaster.frontend.AppState
 import com.pilaster.frontend.store
 import kotlinx.browser.window
 import kotlinx.html.js.onClickFunction
@@ -8,6 +7,7 @@ import kotlinx.html.js.onDoubleClickFunction
 import react.RBuilder
 import react.RComponent
 import react.RProps
+import react.RState
 import react.dom.a
 import react.dom.li
 
@@ -19,7 +19,7 @@ external interface RibbonTabProps : RProps {
     var disabled : Boolean
 }
 
-class RibbonTab : RComponent<RibbonTabProps, AppState>() {
+class RibbonTab : RComponent<RibbonTabProps, RState>() {
     override fun RBuilder.render() {
         li {
             if (props.isStatic) {

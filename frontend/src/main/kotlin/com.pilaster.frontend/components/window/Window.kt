@@ -1,8 +1,5 @@
 package com.pilaster.frontend.components.window
 
-import com.pilaster.frontend.components.state.AppState
-import kotlinx.html.CommonAttributeGroupFacade
-import kotlinx.html.js.onWheelFunction
 import org.w3c.dom.events.Event
 import react.RBuilder
 import react.RComponent

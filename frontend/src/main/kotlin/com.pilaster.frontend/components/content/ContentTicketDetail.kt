@@ -1,6 +1,5 @@
 package com.pilaster.frontend.components.content
 
-import com.pilaster.frontend.AppState
 import kotlinx.css.*
 import kotlinx.html.js.onLoadFunction
 import kotlinx.html.js.onMouseUpFunction
@@ -8,6 +7,7 @@ import kotlinx.html.onMouseUp
 import react.RBuilder
 import react.RComponent
 import react.RProps
+import react.RState
 import react.dom.div
 import react.dom.h1
 import react.dom.script
@@ -15,7 +15,7 @@ import react.dom.style
 import styled.css
 import styled.styledDiv
 
-class ContentTicketDetail : RComponent<RProps, AppState>() {
+class ContentTicketDetail : RComponent<RProps, RState>() {
 
     override fun RBuilder.render() {
 

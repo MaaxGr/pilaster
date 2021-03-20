@@ -1,9 +1,9 @@
 package com.pilaster.frontend.site.login.form
 
-import com.pilaster.frontend.handler.AuthHandler
+import com.pilaster.frontend.App
+import com.pilaster.frontend.handler.AuthentificationHandler
 import com.pilaster.frontend.store
 import kotlinx.browser.document
-import kotlinx.html.InputType
 import kotlinx.html.js.onClickFunction
 import org.w3c.dom.HTMLInputElement
 import react.*
@@ -59,7 +59,7 @@ class LoginFrm: RComponent<RProps, LoginFromState>() {
                             setProp("class", "button success")
                             attrs{
                                 onClickFunction= {
-                                    AuthHandler.performLogin(
+                                    App.authentification.performLogin(
                                         (document.getElementById("username") as HTMLInputElement).value,
                                         (document.getElementById("secret") as HTMLInputElement).value
                                     )

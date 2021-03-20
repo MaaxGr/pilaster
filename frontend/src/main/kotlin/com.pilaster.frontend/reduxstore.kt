@@ -1,11 +1,10 @@
 package com.pilaster.frontend
 
-import com.pilaster.frontend.components.state.AppState
-import com.pilaster.frontend.components.state.CharmsState
+import com.pilaster.frontend.components.state.AppState_old
 import org.reduxkotlin.*
 
-val state2 = AppState()
-val reducer: Reducer<AppState> = { state , action ->
+val state2 = AppState_old()
+val REDUCER: Reducer<AppState_old> = { state, action ->
     state
 /*
     if (action is String) {
@@ -15,5 +14,5 @@ val reducer: Reducer<AppState> = { state , action ->
     }
 */
 }
-val thunk = createThunkMiddleware<AppState>()
-val store = createStore(reducer, state2, applyMiddleware(thunk))
+val thunk = createThunkMiddleware<AppState_old>()
+val store = createStore(REDUCER, state2, applyMiddleware(thunk))
