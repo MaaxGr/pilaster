@@ -30,7 +30,6 @@ class App {
     }
 
     init {
-        initiateRibbon()
         createBaseStructure()
 
         appstate.store.subscribe() {
@@ -70,7 +69,6 @@ class App {
         render(document.getElementById("contentArea")) {
             child(LoginSite::class) {}
         }
-
     }
 
     private fun createMainStructure() {
@@ -83,63 +81,6 @@ class App {
             child(CharmsHandler::class) {
             }
         }
-
-    }
-
-
-    private fun initiateRibbon(){
-        appstate.store.dispatch(
-            RibbonState(
-                tabs= listOf(
-                    RibbonTabState(
-                        "pilaster",
-                        false,
-                        "_section_pilaster_"
-                    ),
-                    RibbonTabState(
-                        "-[--]-",
-                    false,
-                    "_section_none_"
-                    )
-                )
-            )
-        )
-    }
-
-    fun afterLoginRibbon(){ //TMP!!
-        appstate.store.dispatch(
-            RibbonState(
-                tabs= listOf(
-                    RibbonTabState(
-                        "pilaster",
-                        false,
-                        "_section_pilaster_"
-                    ),
-                    RibbonTabState(
-                        "-[--]-",
-                        false,
-                        "_section_none_"
-                    ),
-                    RibbonTabState(
-                        "Projekte",
-                        false,
-                        "_section_projects_",
-                        {App.appstate.store.dispatch(ViewState.PROJECT)}
-                    ),
-                    RibbonTabState(
-                        "Tickets",
-                        false,
-                        "_section_tickets_",
-                        {App.appstate.store.dispatch(ViewState.TICKET)}
-                    ),
-                    RibbonTabState(
-                        "Ansicht",
-                        false,
-                        "_section_ansicht_",
-                    )
-                )
-            )
-        )
     }
 
 }

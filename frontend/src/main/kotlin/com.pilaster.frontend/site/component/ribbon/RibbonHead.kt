@@ -34,7 +34,6 @@ class RibbonHead : RComponent<RProps,RibbonHeadState>() {
                         attrs.onClickAction = it.onClickAction
                     }
                 }
-
             }
 
             // Content
@@ -44,7 +43,7 @@ class RibbonHead : RComponent<RProps,RibbonHeadState>() {
                         attrs.section = elem.targetSection
                         val buttons = mutableListOf<RibbonButtonConfig>()
                         state.ribbon.elements.filter { it.targetSection == elem.targetSection }.forEach {
-                            buttons.add(RibbonButtonConfig(it.buttonText, it.tileGroup))
+                            buttons.add(RibbonButtonConfig(it.buttonText, it.tileGroup,it.onClickAction))
                         }
                         attrs.buttons = buttons
                     }
