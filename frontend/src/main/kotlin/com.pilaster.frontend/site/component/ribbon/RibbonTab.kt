@@ -1,5 +1,6 @@
-package com.pilaster.frontend.components.ribbonmenu
+package com.pilaster.frontend.site.component.ribbon
 
+import com.pilaster.frontend.components.state.content.ViewState
 import com.pilaster.frontend.store
 import kotlinx.browser.window
 import kotlinx.html.js.onClickFunction
@@ -15,6 +16,7 @@ external interface RibbonTabProps : RProps {
     var title: String
     var isStatic: Boolean
     var targetSection: String
+    var onClickAction: () -> Unit
 
     var disabled : Boolean
 }

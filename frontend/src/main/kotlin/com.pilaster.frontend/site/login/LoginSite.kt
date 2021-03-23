@@ -1,7 +1,6 @@
 package com.pilaster.frontend.site.login
 
 import com.pilaster.frontend.site.login.form.LoginFrm
-import kotlinx.browser.document
 import kotlinx.css.*
 import react.RBuilder
 import react.RComponent

@@ -1,7 +1,11 @@
 package com.pilaster.frontend.components.ribbonmenu
 
+import com.pilaster.frontend.App
 import com.pilaster.frontend.components.CharmsEnum
+import com.pilaster.frontend.site.component.ribbon.RibbonTab
+import com.pilaster.frontend.site.component.ribbon.RibbonSection
 import com.pilaster.frontend.store
+import kotlinx.browser.window
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -10,7 +14,7 @@ import react.dom.*
 
 external interface RibbonMenuProps : RProps {
     //Children
-    var tabSection: MutableList<RibbonTabSection>
+    var tabSection: MutableList<RibbonSection>
 }
 
 class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
@@ -51,7 +55,7 @@ class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
             div {
                 setProp("class", "content-holder")
 
-                child(RibbonTabSection::class) {
+                child(RibbonSection::class) {
                     attrs.section = "_section_projects_"
                     attrs.buttons = listOf(
                         RibbonButtonConfig("Projekte anzeigen", "Anzeige"),
@@ -60,7 +64,7 @@ class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
                     //attrs.buttons = listOf(RibbonButtonConfig("A"))
                 }
 
-                child(RibbonTabSection::class) {
+                child(RibbonSection::class) {
                     attrs.section = "_section_tickets_"
                     attrs.buttons = listOf(
                             RibbonButtonConfig("Alle Tickets", "Öffnen"),
@@ -71,7 +75,7 @@ class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
                     )
                 }
 
-                child(RibbonTabSection::class){
+                child(RibbonSection::class){
                     attrs.section = "_section_ansicht_"
                     attrs.buttons = listOf(
                         RibbonButtonConfig("Taskbar",
@@ -84,7 +88,13 @@ class RibbonMenuHandler : RComponent<RibbonMenuProps, RState>() {
                         "",
                         onClickAction = {
 
-                        })
+                        }),
+                        RibbonButtonConfig("Logout",
+                            "Abmelden",
+                            onClickAction = {
+                                App.session.clearSession()
+                                window.location.reload()
+                            })
                     )
                 }
             }

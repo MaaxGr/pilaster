@@ -1,0 +1,19 @@
+#root {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+#contentFrame {
+    height : 100%;
+}
+
+#contentArea {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+}

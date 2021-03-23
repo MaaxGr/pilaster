@@ -1,5 +1,7 @@
-package com.pilaster.frontend.components.ribbonmenu
+package com.pilaster.frontend.site.component.ribbon
 
+import com.pilaster.frontend.components.ribbonmenu.RibbonButton
+import com.pilaster.frontend.components.ribbonmenu.RibbonButtonConfig
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -13,7 +15,7 @@ external interface RibbonTabSectionProps : RProps {
 }
 
 
-class RibbonTabSection : RComponent<RibbonTabSectionProps, RState>() {
+class RibbonSection : RComponent<RibbonTabSectionProps, RState>() {
     override fun RBuilder.render() {
         div {
             setProp("class", "section")
