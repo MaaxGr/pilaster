@@ -41,7 +41,6 @@ class AuthentificationHandler : CoroutineScope {
 
             if (accessToken.succeeded){
                 App.session.storeAccesstoken(accessToken.accessToken)
-                App().afterLoginRibbon()
                 App.appstate.store.dispatch(AppstatePhase.MAIN)
             }
 
