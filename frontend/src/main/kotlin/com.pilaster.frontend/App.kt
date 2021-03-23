@@ -3,15 +3,12 @@ package com.pilaster.frontend
 import com.pilaster.frontend.components.charms.CharmsHandler
 import com.pilaster.frontend.components.content.ContentHandler
 import com.pilaster.frontend.components.ribbonmenu.RibbonMenuHandler
-import com.pilaster.frontend.handler.AppstateHandler
 import com.pilaster.frontend.components.state.AppstatePhase
 import com.pilaster.frontend.components.state.content.ViewState
 import com.pilaster.frontend.components.state.ribbon.RibbonElementState
 import com.pilaster.frontend.components.state.ribbon.RibbonState
 import com.pilaster.frontend.components.state.ribbon.RibbonTabState
-import com.pilaster.frontend.handler.AuthentificationHandler
-import com.pilaster.frontend.handler.BackendHandler
-import com.pilaster.frontend.handler.SessionHandler
+import com.pilaster.frontend.handler.*
 import com.pilaster.frontend.site.SiteBase
 import com.pilaster.frontend.site.component.ribbon.RibbonHead
 import com.pilaster.frontend.site.login.LoginSite
@@ -40,7 +37,7 @@ class App {
     }
 
     private fun onStateChange() {
-        println("Statechange => ${appstate.store.state}")
+        //println("Statechange => ${appstate.store.state}")
 
         when (appstate.store.state.phase) {
             AppstatePhase.LOGIN -> {

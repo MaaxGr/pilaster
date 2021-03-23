@@ -42,6 +42,19 @@ class AuthentificationHandler : CoroutineScope {
             if (accessToken.succeeded){
                 App.session.storeAccesstoken(accessToken.accessToken)
                 App.appstate.store.dispatch(AppstatePhase.MAIN)
+                js("""
+                    Metro.toast.create("Login erfolgreich!",
+                    null,
+                    null,
+                    "success");
+                """)
+            } else {
+                js("""
+                    Metro.toast.create("Login fehlgeschlagen!",
+                    null,
+                    null,
+                    "alert");
+                """)
             }
 
         }
