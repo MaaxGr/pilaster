@@ -31,7 +31,6 @@ class AppstateHandler {
                         state.copy(phase = action, ribbon = initiateRibbon())
                     }
                 }
-
             }
             is RibbonState->{
                 state.copy(ribbon = action)

@@ -69,7 +69,6 @@ class App {
         render(document.getElementById("contentArea")) {
             child(LoginSite::class) {}
         }
-
     }
 
     private fun createMainStructure() {
@@ -82,10 +81,6 @@ class App {
             child(CharmsHandler::class) {
             }
         }
-
     }
-
-
-
 
 }

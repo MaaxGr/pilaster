@@ -39,39 +39,9 @@ class RibbonTab : RComponent<RibbonTabProps, RState>() {
                     }
                 }
 
-                when(props.title) {
-                    //if(props.title == "Home"){
-                    "Home" -> {
-                        //store.state.contentArea = "Home"
-                        //store.dispatch("Dummy")
-
-                        attrs {
-                            onClickFunction = {
-                                store.state.contentArea = "Home"
-                                store.dispatch("Dummy")
-                            }
-                        }
-                    }
-                    "Tickets" ->{
-                        //store.state.contentArea = "Ticket"
-                        //store.dispatch("Dummy")
-                        attrs {
-                            onClickFunction = {
-                                store.state.contentArea = "Ticket"
-                                store.dispatch("Dummy")
-                            }
-                        }
-                    }
-                    "Projekte" -> {
-                        attrs {
-                            onClickFunction = {
-                                store.state.contentArea = "Project"
-                                store.dispatch("Dummy")
-                            }
-                        }
-                    }
+                attrs {
+                    onClickFunction = {props.onClickAction.invoke()}
                 }
-
             }
         }
     }
