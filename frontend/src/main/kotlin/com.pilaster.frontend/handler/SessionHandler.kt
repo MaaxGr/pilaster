@@ -14,5 +14,6 @@ class SessionHandler {
 
     fun clearSession(){
         sessionStorage.clear()
+        console.log("cleared")
     }
 }
